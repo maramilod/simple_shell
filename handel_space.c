@@ -57,6 +57,7 @@ int hand_space(char *k)
 	ou[t] = '\n';
 	u = our(ou);
 	new[n] = '\n';
+	o = check(new);
 	o = excv(new);
 	if (o == -1 && u == 1)
 	{

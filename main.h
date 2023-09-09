@@ -8,6 +8,12 @@
 
 extern char **environ;
 
+/**
+ * struct ourcommand - structure
+ * @com: the name of co
+ * @fn: the function
+ */
+
 typedef struct ourcommand
 {
 	char *com;
@@ -22,5 +28,9 @@ int excv(char *str);
 char *ifnotexcv(char *st);
 int our(char *lin);
 int atty(void);
+int check(char *x);
+
+
+
 
 #endif
