@@ -69,7 +69,7 @@ int main(int argc, char **argv)
 	int space = 0;
 	int er = 0;
 	char *li;
-	int y;
+	int y = 0;
 
 	y = atty();
 	(void)argv;

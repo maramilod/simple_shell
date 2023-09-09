@@ -9,7 +9,7 @@ int lenght(char *k);
 
 int hand_space(char *k)
 {
-	int i = 0, o, j = 0, n = 0, last = 0, t = 0, u;
+	int i = 0, o, j = 0, n = 0, last = 0, t = 0, u = 0;
 	char *new;
 	char *ou;
 
@@ -59,7 +59,7 @@ int hand_space(char *k)
 	new[n] = '\n';
 	o = check(new);
 	o = excv(new);
-	if (o == -1 && u == 1)
+	if (o == -1 && u == -1)
 	{
 		free(new);
 		return (-1);

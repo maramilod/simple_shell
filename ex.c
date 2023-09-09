@@ -51,8 +51,6 @@ int excv(char *str)
 int atty(void)
 {
 	if (isatty(STDIN_FILENO))
-	{
 		return (0);
-	}
 	return (-1);
 }
