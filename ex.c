@@ -16,6 +16,14 @@ int excv(char *str)
 
 	if (!str)
 		write(STDOUT_FILENO, "file not open", 13);
+	if (same(str, "ls") == 0)
+	{
+		if (getenv("PATH") == NULL || strcmp(getenv("PATH"), "") == 0)
+		{
+			write(STDOUT_FILENO, "ls: command not found\n", 22);
+			return (0);
+		}
+	}
 	for (i = 0; test[i] != NULL; i++)
 	{
 		if (same(str, test[i])  == 0)

@@ -93,12 +93,12 @@ int main(int argc, char **argv)
 		}
 		space = hand_space(lin);
 		if (space == -1)
-		{
-			li = ifnotexcv(lin);
-			printf("%s: %d: %s: not found\n", argv[0], er, li);
-			er++;
-			space = 0;
-		}
+			if (y == 0)
+			{
+				li = ifnotexcv(lin);
+				printf("%s: %d: %s: not found\n", argv[0], er, li);
+				er++;
+			}
 	}
 	free(lin);
 	return (0);
