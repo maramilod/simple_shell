@@ -6,6 +6,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <fcntl.h>
+#include <stdarg.h>
 
 extern char **environ;
 
@@ -21,6 +22,8 @@ typedef struct ourcommand
 	int (*fn)();
 } ourc;
 
+void puti(int num);
+int _printf(char *arg, ...);
 void putss(char *string);
 int lenght(char *k);
 int same(const char *w, char *m);

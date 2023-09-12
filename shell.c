@@ -34,7 +34,7 @@ int main(int argc, char **argv)
 		if (space == -1)
 		{
 			li = ifnotexcv(lin);
-			printf("%s: %d: %s: not found\n", argv[0],  er, li);
+			_printf("ccdccc", argv[0], ": ", er, ": ", li, ": not found\n");
 			er++;
 		}
 	}

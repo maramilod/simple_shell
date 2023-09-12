@@ -8,7 +8,7 @@
 
 int hand_space(char *k, char *argv)
 {
-	int o, u, i = 0;
+	int o, u = 0, i = 0;
 	char **new;
 
 	new = malloc(sizeof(char *));
@@ -25,6 +25,8 @@ int hand_space(char *k, char *argv)
 	if (same(new[0], "exit") == 0)
 	{
 		_exxit(new, argv);
+		free(new);
+		return (0);
 	}
 	else if (o == -1 && u == -1)
 	{

@@ -37,9 +37,9 @@ int _exxit(char **str, char *argv)
 		}
 		else
 		{
-			printf("%s: %d: exit: Illegal number: %s\n", argv, f, str[1]);
+			_printf("ccdccc", argv,": ", f,": exit: Illegal number: ", str[1], "\n");
 			f++;
-			return (-1);
+			return (0);
 		}
 	}
 	exit(f - 1);
