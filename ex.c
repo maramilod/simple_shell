@@ -3,54 +3,101 @@
 /**
  * excv - function to excute
  * @str: value
+ * @argv: string
  * Return: always 0 | -1
  */
 
-int excv(char *str)
+int excv(char *str, char **argv)
 {
-	int i;
 	pid_t pid;
-	char *test[] = {"/bin/ls", "ls", NULL};
-	char *const arg[] = {NULL};
-
 
 	if (!str)
-		write(STDOUT_FILENO, "file not open", 13);
-	if (same(str, "ls") == 0)
 	{
-		if (getenv("PATH") == NULL || strcmp(getenv("PATH"), "") == 0)
-		{
-			write(STDOUT_FILENO, "ls: command not found\n", 22);
-			return (0);
-		}
+		return (0);
 	}
-	for (i = 0; test[i] != NULL; i++)
+	str = pathy(str);
+	if (str)
 	{
-		if (same(str, test[i])  == 0)
+		pid = fork();
+		if (pid == 0)
 		{
-			pid = fork();
-			if (pid == 0)
-			{
-				execve("/bin/ls", arg, NULL);
-			}
-			else if (pid > 0)
-			{
-				wait(NULL);
-				return (0);
-			}
+			execve(str, argv, NULL);
+		}
+		else if (pid > 0)
+		{
+			wait(NULL);
+			return (0);
 		}
 	}
 	return (-1);
 }
 
 /**
- * atty - function
- * Return: always
+ * moge - my own get env function
+ * @path: PATH
+ * Return: the path
  */
 
-int atty(void)
+char *moge(char *path)
 {
-	if (isatty(STDIN_FILENO))
-		return (0);
-	return (-1);
+	int l = 0, lco = 0, s;
+	char **pathy;
+	char *copy, *new;
+
+	l = lenght(path);
+	pathy = environ;
+	while (*pathy)
+	{
+		s = _strncm(path, *pathy, l);
+		if (s == 0 && (*pathy)[l] == '=')
+		{
+			copy = (*pathy) + l + 1;
+			lco = lenght(copy);
+			new = malloc(sizeof(char) * (lco + 1));
+			_strcopy(new, copy);
+			return (new);
+		}
+		pathy++;
+	}
+	return (NULL);
+}
+
+/**
+ * pathy - function handle the path
+ * @arg: string say if it's a ath or not
+ * Return: importnt
+ */
+
+char *pathy(char *arg)
+{
+	char *bigpath = NULL, *or = NULL;
+	char *path = NULL, *buff = NULL;
+
+	if (access(arg, F_OK) != -1)
+	{
+		return (arg);
+	}
+	buff = malloc(sizeof(char) * 1024);
+	bigpath = moge("PATH");
+
+	if (bigpath != NULL && same(bigpath, "") != 0)
+	{
+		or = strdup(bigpath);
+		path = strtok(or, ":");
+		while (path)
+		{
+			strncpy(buff, path, 1024);
+			_strcat(buff, "/");
+			_strcat(buff, arg);
+
+			if (access(buff, F_OK) != -1)
+			{
+				free(or);
+				return (buff);
+			}
+			path = strtok(NULL, ":");
+		}
+	}
+	free(or);
+	return (NULL);
 }
