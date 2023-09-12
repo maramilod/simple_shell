@@ -6,7 +6,7 @@
  * Return: -1 if false
  */
 
-int _exxit(char **str)
+int _exxit(char **str, char *argv)
 {
 	int i = 0, j, mul = 1, u = 0;
 	static int f = 1;
@@ -37,8 +37,8 @@ int _exxit(char **str)
 		}
 		else
 		{
+			printf("%s: %d: exit: Illegal number: %s\n", argv, f, str[1]);
 			f++;
-			printf("alligil number\n");
 			return (-1);
 		}
 	}

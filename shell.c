@@ -30,7 +30,7 @@ int main(int argc, char **argv)
 			free(lin);
 			return (0);
 		}
-		space = hand_space(lin);
+		space = hand_space(lin, argv[0]);
 		if (space == -1)
 		{
 			li = ifnotexcv(lin);

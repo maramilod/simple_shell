@@ -6,7 +6,7 @@
  * Return: always 0 or 1
  */
 
-int hand_space(char *k)
+int hand_space(char *k, char *argv)
 {
 	int o, u, i = 0;
 	char **new;
@@ -22,7 +22,11 @@ int hand_space(char *k)
 	new[i] = NULL;
 	o = excv(new[0], new);
 	u = our(new[0], new);
-	if (o == -1 && u == -1)
+	if (same(new[0], "exit") == 0)
+	{
+		_exxit(new, argv);
+	}
+	else if (o == -1 && u == -1)
 	{
 		free(new);
 		return (-1);

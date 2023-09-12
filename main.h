@@ -24,7 +24,7 @@ typedef struct ourcommand
 void putss(char *string);
 int lenght(char *k);
 int same(const char *w, char *m);
-int hand_space(char *k);
+int hand_space(char *k, char *argv);
 int excv(char *str, char **argv);
 char *ifnotexcv(char *st);
 int our(char *lin, char **argv);
@@ -34,7 +34,7 @@ char *moge(char *path);
 int _strncm(char *s1, char *s2, int t);
 char *_strcat(char *buffer, char *add);
 void sign(int si);
-int _exxit(char **str);
+int _exxit(char **str, char *argv);
 char *_strcopy(char *buffer, char *newcopy);
 char *_strncpy(char *str2, char *str, int n);
 char *_strdup(char *str);
