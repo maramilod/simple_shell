@@ -82,11 +82,11 @@ char *pathy(char *arg)
 
 	if (bigpath != NULL && same(bigpath, "") != 0)
 	{
-		or = strdup(bigpath);
+		or = _strdup(bigpath);
 		path = strtok(or, ":");
 		while (path)
 		{
-			strncpy(buff, path, 1024);
+			_strncpy(buff, path, 1024);
 			_strcat(buff, "/");
 			_strcat(buff, arg);
 

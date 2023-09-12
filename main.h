@@ -36,7 +36,8 @@ char *_strcat(char *buffer, char *add);
 void sign(int si);
 int _exxit(char **str);
 char *_strcopy(char *buffer, char *newcopy);
-
+char *_strncpy(char *str2, char *str, int n);
+char *_strdup(char *str);
 
 
 #endif
