@@ -32,25 +32,33 @@ int _strncm(char *s1, char *s2, int t)
  * Return: 1| 0
  */
 
-int same(const char *w, char *m)
+int samey(const char *w, char *m)
 {
-	int a = 0, b = 0, i = 0;
+	size_t  a = 0, b = 0, i = 0;
 
 	if (w == NULL || m == NULL)
 	{
 		return (-1);
 	}
 	while (w[a] != '\n' && w[a])
+	{
 		a++;
+	}
 	while (m[b])
+	{
 		b++;
+	}
 	if (a == b)
 	{
 		while (w[i] == m[i] && w[i] != '\0' && m[i] != '\0')
+		{
 			i++;
+		}
 	}
 	else
+	{
 		return (-1);
+	}
 	if (i == a && i == b)
 	{
 		return (0);
@@ -67,6 +75,11 @@ int same(const char *w, char *m)
 int lenght(char *k)
 {
 	int i = 0;
+
+	if (k == NULL)
+	{
+		return (0);
+	}
 
 	while (k[i] != '\0')
 	{

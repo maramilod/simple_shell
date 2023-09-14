@@ -26,7 +26,7 @@ void puti(int num);
 int _printf(char *arg, ...);
 void putss(char *string);
 int lenght(char *k);
-int same(const char *w, char *m);
+int same(char *w, char *m);
 int hand_space(char *k, char *argv);
 int excv(char *str, char **argv);
 char *ifnotexcv(char *st);
@@ -41,6 +41,7 @@ int _exxit(char **str, char *argv);
 char *_strcopy(char *buffer, char *newcopy);
 char *_strncpy(char *str2, char *str, int n);
 char *_strdup(char *str);
+ssize_t _getline(char **lin, size_t l, int fn);
 
 
 #endif

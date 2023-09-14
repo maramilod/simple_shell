@@ -8,14 +8,27 @@
 
 char *_strdup(char *str)
 {
-	int i = 0;
+	int i = 0, l;
 	char *str2;
 
-	str2 = malloc(sizeof(char) * (lenght(str)));
-	while (str[i])
+	if (str == NULL)
 	{
-		str2[i] = str[i];
-		i++;
+		return (NULL);
+	}
+	l = lenght(str);
+	str2 = malloc(sizeof(char) * (l + 1));
+
+	if (!str2)
+	{
+		return (NULL);
+	}
+	else
+	{
+		while (i <= l)
+		{
+			str2[i] = str[i];
+			i++;
+		}
 	}
 	return (str2);
 }
@@ -32,10 +45,16 @@ char *_strncpy(char *str2, char *str, int n)
 {
 	int i = 0;
 
-	while (i != n)
+	while (i < n && str[i] != '\0')
 	{
 		str2[i] = str[i];
 		i++;
 	}
+	while (i < n)
+	{
+		str2[i] = '\0';
+		i++;
+	}
+
 	return (str2);
 }

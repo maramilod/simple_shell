@@ -29,6 +29,7 @@ int excv(char *str, char **argv)
 			return (0);
 		}
 	}
+	free(str);
 	return (-1);
 }
 
@@ -72,17 +73,34 @@ char *pathy(char *arg)
 {
 	char *bigpath = NULL, *or = NULL;
 	char *path = NULL, *buff = NULL;
+	char *res = NULL;
 
+	if (!arg)
+	{
+		return (NULL);
+	}
 	if (access(arg, F_OK) != -1)
 	{
 		return (arg);
 	}
 	buff = malloc(sizeof(char) * 1024);
+	if (buff == NULL)
+	{
+		return (NULL);
+	}
+	bigpath = malloc(sizeof(char) * 1024);
 	bigpath = moge("PATH");
 
-	if (bigpath != NULL && same(bigpath, "") != 0)
+	if (bigpath != NULL)
 	{
+		or = malloc(sizeof(char) * 1024);
 		or = _strdup(bigpath);
+		free(bigpath);
+		if (or == NULL)
+		{
+			free(buff);
+			return (NULL);
+		}
 		path = strtok(or, ":");
 		while (path)
 		{
@@ -92,12 +110,13 @@ char *pathy(char *arg)
 
 			if (access(buff, F_OK) != -1)
 			{
-				free(or);
-				return (buff);
+				res = _strdup(buff);
+				break;
 			}
 			path = strtok(NULL, ":");
 		}
 	}
 	free(or);
-	return (NULL);
+	free(buff);
+	return (res);
 }

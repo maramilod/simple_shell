@@ -11,7 +11,10 @@ int hand_space(char *k, char *argv)
 	int o, u = 0, i = 0;
 	char **new;
 
-	new = malloc(sizeof(char *));
+	new = malloc(sizeof(char *) * 1024);
+
+	if (!new)
+		return (-1);
 	new[i] = strtok(k, " \"\n");
 
 	while (new[i])
@@ -63,9 +66,15 @@ char *ifnotexcv(char *st)
 	int ln;
 
 	ln = lenght(st);
-	new = malloc((sizeof(char *) * ln));
-	new = strtok(st, " ");
+	new = malloc((sizeof(char *) * ln) + 1);
+	if (new == NULL)
+	{
+		return (NULL);
+	}
+	_strcopy(new, st);
+	new = strtok(new, " ");
 	new = strtok(new, "\n");
+
 	return (new);
 }
 
