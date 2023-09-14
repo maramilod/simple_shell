@@ -22,6 +22,8 @@ typedef struct ourcommand
 	int (*fn)();
 } ourc;
 
+unsigned int is_d(char s, char *d);
+char *mystrtok(char *str, char *d);
 void puti(int num);
 int _printf(char *arg, ...);
 void putss(char *string);

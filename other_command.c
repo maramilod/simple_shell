@@ -22,17 +22,22 @@ int _exxit(char **str, char *argv)
 	}
 	if (str[1][i])
 	{
-		if (str[1][i] >= '0' && str[1][i] <= '9')
+		for (j = 0; str[1][j]; j++)
 		{
-			for (j = 0; str[1][j]; j++)
-			{
+			if (str[1][j] >= '0' && str[1][j] <= '9')
 				u++;
-			}
+		}
+		if (u == lenght(str[1]))
+		{
+			f = 1;
 			u--;
 			for (j = u; j >= 0; j--)
 			{
-				f += (str[1][j] - '0') * mul;
-				mul *= 10;
+				if (str[1][j] >= '0' && str[1][j] <= '9')
+				{
+					f += (str[1][j] - '0') * mul;
+					mul *= 10;
+				}
 			}
 		}
 		else

@@ -15,12 +15,12 @@ int hand_space(char *k, char *argv)
 
 	if (!new)
 		return (-1);
-	new[i] = strtok(k, " \"\n");
+	new[i] = mystrtok(k, " \"\n");
 
 	while (new[i])
 	{
 		i++;
-		new[i] = strtok(NULL, " \n");
+		new[i] = mystrtok(NULL, " \n");
 	}
 	new[i] = NULL;
 	o = excv(new[0], new);
@@ -33,6 +33,7 @@ int hand_space(char *k, char *argv)
 	}
 	else if (o == -1 && u == -1)
 	{
+		printf("LL\n");
 		free(new);
 		return (-1);
 	}
