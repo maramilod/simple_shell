@@ -31,6 +31,11 @@ int hand_space(char *k, char *argv, env_l **env)
 		free(new);
 		return (0);
 	}
+	else if (same(new[0], "cd") == 0)
+	{
+		cd(new[1]);
+		free(new);
+	}
 	else if (o == -1 && u == -1)
 	{
 		free(new);

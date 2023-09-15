@@ -71,3 +71,21 @@ int our(char *lin, char **argv, env_l **env)
 	}
 	return (-1);
 }
+
+/**
+ * freest - function to free arry
+ * @st: arry
+ * Return: free
+ */
+
+void freest(char **st)
+{
+	int i = 0;
+
+	while (st[i])
+	{
+		free(st[i]);
+		i++;
+	}
+	free(st);
+}

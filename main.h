@@ -61,6 +61,6 @@ char *_strcopy(char *buffer, char *newcopy);
 char *_strncpy(char *str2, char *str, int n);
 char *_strdup(char *str);
 ssize_t _getline(char **lin, size_t l, int fn);
-
-
+void freest(char **st);
+int cd(char *str);
 #endif
