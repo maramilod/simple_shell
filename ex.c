@@ -7,7 +7,7 @@
  * Return: always 0 | -1
  */
 
-int excv(char *str, char **argv)
+int excv(char *str, char **argv, env_l **env)
 {
 	pid_t pid;
 
@@ -15,7 +15,7 @@ int excv(char *str, char **argv)
 	{
 		return (0);
 	}
-	str = pathy(str);
+	str = pathy(str, env);
 	if (str)
 	{
 		pid = fork();
@@ -39,26 +39,26 @@ int excv(char *str, char **argv)
  * Return: the path
  */
 
-char *moge(char *path)
+char *moge(char *path, env_l **env)
 {
 	int l = 0, lco = 0, s;
-	char **pathy;
+	env_l *pathy;
 	char *copy, *new;
 
 	l = lenght(path);
-	pathy = environ;
-	while (*pathy)
+	pathy = *env;
+	while (pathy)
 	{
-		s = _strncm(path, *pathy, l);
-		if (s == 0 && (*pathy)[l] == '=')
+		s = _strncm(path, pathy->env, l);
+		if (s == 0 && (pathy->env)[l] == '=')
 		{
-			copy = (*pathy) + l + 1;
+			copy = (pathy->env) + l + 1;
 			lco = lenght(copy);
 			new = malloc(sizeof(char) * (lco + 1));
 			_strcopy(new, copy);
 			return (new);
 		}
-		pathy++;
+		pathy = pathy->next;
 	}
 	return (NULL);
 }
@@ -69,7 +69,7 @@ char *moge(char *path)
  * Return: importnt
  */
 
-char *pathy(char *arg)
+char *pathy(char *arg, env_l **env)
 {
 	char *bigpath = NULL, *or = NULL;
 	char *path = NULL, *buff = NULL;
@@ -79,6 +79,7 @@ char *pathy(char *arg)
 	{
 		return (NULL);
 	}
+	if (arg[0] == '/')
 	if (access(arg, F_OK) != -1)
 	{
 		return (arg);
@@ -89,7 +90,7 @@ char *pathy(char *arg)
 		return (NULL);
 	}
 	bigpath = malloc(sizeof(char) * 1024);
-	bigpath = moge("PATH");
+	bigpath = moge("PATH", env);
 
 	if (bigpath != NULL)
 	{

@@ -51,38 +51,21 @@ int _exxit(char **str, char *argv)
 	return (0);
 }
 /**
- * envo - function
- *
- * Return: 0 or -1
- */
-int envo(void)
-{
-	int i;
-
-	for (i = 0; environ[i] != NULL; i++)
-	{
-		putss(environ[i]);
-		putss("\n");
-	}
-	return (0);
-}
-
-/**
  * our - function
  * @argv: function dit
  * @lin: string
  * Return: 0 or -1
  */
-int our(char *lin, char **argv)
+int our(char *lin, char **argv, env_l **env)
 {
-	ourc array[] = {{"env", envo}, {"exit", _exxit}, {NULL, NULL}};
+	ourc array[] = {{"env", print_l}, {"unsetenv", unset}, {"setenv", _setenv}, {NULL, NULL}};
 	int i;
 
 	for (i = 0; array[i].com != NULL; i++)
 	{
 		if (same(lin, array[i].com) == 0)
 		{
-			array[i].fn(argv);
+			array[i].fn(argv, env);
 			return (0);
 		}
 	}

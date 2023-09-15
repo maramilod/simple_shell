@@ -6,7 +6,7 @@
  * Return: always 0 or 1
  */
 
-int hand_space(char *k, char *argv)
+int hand_space(char *k, char *argv, env_l **env)
 {
 	int o, u = 0, i = 0;
 	char **new;
@@ -23,8 +23,8 @@ int hand_space(char *k, char *argv)
 		new[i] = mystrtok(NULL, " \n");
 	}
 	new[i] = NULL;
-	o = excv(new[0], new);
-	u = our(new[0], new);
+	o = excv(new[0], new, env);
+	u = our(new[0], new, env);
 	if (same(new[0], "exit") == 0)
 	{
 		_exxit(new, argv);
@@ -33,7 +33,6 @@ int hand_space(char *k, char *argv)
 	}
 	else if (o == -1 && u == -1)
 	{
-		printf("LL\n");
 		free(new);
 		return (-1);
 	}

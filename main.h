@@ -21,6 +21,23 @@ typedef struct ourcommand
 	char *com;
 	int (*fn)();
 } ourc;
+typedef struct env_list {
+	char *env;
+	struct env_list *next;
+} env_l;
+
+/**
+ * linked list
+ */
+int samenv(char *en, char *arg);
+int print_l(char **arg, env_l **list);
+env_l *add_l(env_l **list,char *enron);
+env_l *set_list();
+int find(env_l *head, char *word);
+int delete_l(env_l **head, int index);
+int unset(char **arg, env_l **list);
+env_l *edit_l(env_l **list, char *buffer, int idx);
+int _setenv(char **arg, env_l **list);
 
 unsigned int is_d(char s, char *d);
 char *mystrtok(char *str, char *d);
@@ -29,13 +46,13 @@ int _printf(char *arg, ...);
 void putss(char *string);
 int lenght(char *k);
 int same(char *w, char *m);
-int hand_space(char *k, char *argv);
-int excv(char *str, char **argv);
+int hand_space(char *k, char *argv, env_l **env);
+int excv(char *str, char **argv, env_l **env);
 char *ifnotexcv(char *st);
-int our(char *lin, char **argv);
+int our(char *lin, char **argv, env_l **env);
 int atty(void);
-char *pathy(char *arg);
-char *moge(char *path);
+char *pathy(char *arg, env_l **env);
+char *moge(char *path, env_l **env);
 int _strncm(char *s1, char *s2, int t);
 char *_strcat(char *buffer, char *add);
 void sign(int si);

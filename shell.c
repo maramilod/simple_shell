@@ -10,6 +10,7 @@
 
 int main(int argc, char **argv)
 {
+	env_l *list;
 	char *lin = NULL, *li = NULL;
 	size_t l = 1024;
 	ssize_t r;
@@ -18,6 +19,7 @@ int main(int argc, char **argv)
 	y = atty();
 	(void)argc;
 	signal(SIGINT, sign);
+	list = set_list();
 	while (1)
 	{
 		if (y == 0)
@@ -29,7 +31,7 @@ int main(int argc, char **argv)
 				putss("\n");
 			return (0);
 		}
-		space = hand_space(lin, argv[0]);
+		space = hand_space(lin, argv[0], &list);
 		if (space == -1)
 		{
 			le = lenght(lin);
