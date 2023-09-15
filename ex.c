@@ -111,6 +111,7 @@ char *pathy(char *arg, env_l **env)
 
 			if (access(buff, F_OK) != -1)
 			{
+				res = malloc(sizeof(char) * lenght(buff));
 				res = _strdup(buff);
 				break;
 			}
