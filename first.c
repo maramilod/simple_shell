@@ -19,6 +19,10 @@ int hand_space(char *k, char *argv, env_l **env, int er)
 
 	while (new[i])
 	{
+		if (new[i][0] == '#')
+		{
+			break;
+		}
 		i++;
 		new[i] = mystrtok(NULL, " \n");
 	}

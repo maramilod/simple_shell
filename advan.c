@@ -83,8 +83,6 @@ void excute(char *file, char **argv, env_l *list)
 	size_t  l = 1024;
 	char *li = NULL, *lin = NULL;
 	ssize_t r;
-	FILE *filo;
-
 
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
@@ -93,17 +91,9 @@ void excute(char *file, char **argv, env_l *list)
 		return;
 	}
 
-	filo = fdopen(fd, "r");
-	if (filo == NULL)
-	{
-		putss("ERROR");
-		close(fd);
-		return;
-	}
 
-	while ((r =getline(&lin, &l, filo)) != -1)
+	while ((r = _getline(&lin, l, fd)) != -1)
 	{
-		printf("nagra");
 		space = hand_space(lin, argv[0], &list, er);
 		if (space == -1)
 		{
@@ -111,11 +101,9 @@ void excute(char *file, char **argv, env_l *list)
 			li = malloc(sizeof(char) * le);
 			li = ifnotexcv(lin);
 			_printf("ccdccc", argv[0], ": ", er, ": ", li, ": not found\n");
-			free(lin);
 			free(li);
 			er++;
 		}
 	}
-	free(lin);
 	close(fd);
 }
