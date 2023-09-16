@@ -65,4 +65,5 @@ ssize_t _getline(char **lin, size_t l, int fn);
 void freest(char **st);
 char *get_l(env_l *head, int index);
 int cd(char **argv, env_l **env);
+void excute(char *file, char **argv, env_l *list);
 #endif

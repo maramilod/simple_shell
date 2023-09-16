@@ -20,6 +20,11 @@ int main(int argc, char **argv)
 	(void)argc;
 	signal(SIGINT, sign);
 	list = set_list();
+	if (argc == 2)
+	{
+		excute(argv[1], argv, list);
+		return (0);
+	}
 	while (1)
 	{
 		if (y == 0)
@@ -29,8 +34,8 @@ int main(int argc, char **argv)
 		{
 			if (y == 0)
 				putss("\n");
-			free(lin);
-			free_l(&list);
+	/*		free(lin);
+			free_l(&list);*/
 			return (0);
 		}
 		space = hand_space(lin, argv[0], &list, er);

@@ -68,3 +68,54 @@ int same(char *w, char *m)
 	
 	return (-1);
 }
+
+/**
+ * excute - function
+ * @file: filename
+ * @argv: string
+ * @list: the env list
+ * Return: void
+ */
+
+void excute(char *file, char **argv, env_l *list)
+{
+	int fd = -1, space = 0, er = 0, le = 0;
+	size_t  l = 1024;
+	char *li = NULL, *lin = NULL;
+	ssize_t r;
+	FILE *filo;
+
+
+	fd = open(file, O_RDONLY);
+	if (fd == -1)
+	{
+		perror(file);
+		return;
+	}
+
+	filo = fdopen(fd, "r");
+	if (filo == NULL)
+	{
+		putss("ERROR");
+		close(fd);
+		return;
+	}
+
+	while ((r =getline(&lin, &l, filo)) != -1)
+	{
+		printf("nagra");
+		space = hand_space(lin, argv[0], &list, er);
+		if (space == -1)
+		{
+			le = lenght(lin);
+			li = malloc(sizeof(char) * le);
+			li = ifnotexcv(lin);
+			_printf("ccdccc", argv[0], ": ", er, ": ", li, ": not found\n");
+			free(lin);
+			free(li);
+			er++;
+		}
+	}
+	free(lin);
+	close(fd);
+}
