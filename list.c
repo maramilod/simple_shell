@@ -92,3 +92,37 @@ int print_l(char **arg, env_l **list)
 	}
 	return (0);
 }
+/**
+ * free_l - function
+ * @h: list
+ * Return: i
+ */
+size_t free_l(env_l **h)
+{
+	size_t i = 0;
+	int j;
+	env_l *t;
+
+	if (!h || !(*h))
+		return (0);
+	while (*h)
+	{
+		j = *h - (*h)->next;
+		if (j > 1 || j == 1)
+		{
+			t = (*h)->next;
+			free(*h);
+			*h = t;
+			i++;
+		}
+		if (j <= 0)
+		{
+			free(*h);
+			*h = NULL;
+			++i;
+			return (i);
+		}
+	}
+	*h = NULL;
+	return (i);
+}

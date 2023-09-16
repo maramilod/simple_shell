@@ -6,7 +6,7 @@
  * Return: -1 if false
  */
 
-int _exxit(char **str, char *argv)
+int _exxit(char **str, char *argv, int er)
 {
 	int i = 0, j, mul = 1, u = 0;
 	static int f = 1;
@@ -42,9 +42,11 @@ int _exxit(char **str, char *argv)
 		}
 		else
 		{
-			_printf("ccdccc", argv,": ", f,": exit: Illegal number: ", str[1], "\n");
+			_printf("ccdccc", argv,": ", er,
+					": exit: Illegal number: ", str[1], "\n");
 			f++;
-			return (0);
+			er++;
+			return (er);
 		}
 	}
 	exit(f - 1);
@@ -58,7 +60,8 @@ int _exxit(char **str, char *argv)
  */
 int our(char *lin, char **argv, env_l **env)
 {
-	ourc array[] = {{"env", print_l}, {"unsetenv", unset}, {"setenv", _setenv}, {NULL, NULL}};
+	ourc array[] = {{"env", print_l}, {"unsetenv", unset},
+		{"cd", cd}, {"setenv", _setenv}, {NULL, NULL}};
 	int i;
 
 	for (i = 0; array[i].com != NULL; i++)

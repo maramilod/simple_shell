@@ -68,20 +68,3 @@ int same(char *w, char *m)
 	
 	return (-1);
 }
-
-/**
- * cd - function to change directory
- * @env: the path
- * @str: the second value to
- * Return: 0
- */
-
-int cd(char *str)
-{
-	if (str)
-	{
-		chdir(str);
-	}
-	return (0);
-
-}

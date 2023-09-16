@@ -6,9 +6,9 @@
  * Return: always 0 or 1
  */
 
-int hand_space(char *k, char *argv, env_l **env)
+int hand_space(char *k, char *argv, env_l **env, int er)
 {
-	int o, u = 0, i = 0;
+	int o, u = 0, i = 0, x;
 	char **new;
 
 	new = malloc(sizeof(char *) * 1024);
@@ -27,14 +27,9 @@ int hand_space(char *k, char *argv, env_l **env)
 	u = our(new[0], new, env);
 	if (same(new[0], "exit") == 0)
 	{
-		_exxit(new, argv);
+		x = _exxit(new, argv, er);
 		free(new);
-		return (0);
-	}
-	else if (same(new[0], "cd") == 0)
-	{
-		cd(new[1]);
-		free(new);
+		return (x);
 	}
 	else if (o == -1 && u == -1)
 	{

@@ -14,7 +14,7 @@ int main(int argc, char **argv)
 	char *lin = NULL, *li = NULL;
 	size_t l = 1024;
 	ssize_t r;
-	int space = 0, er = 0, y, le = 0;
+	int space = 0, er = 1, y, le = 0;
 
 	y = atty();
 	(void)argc;
@@ -29,20 +29,31 @@ int main(int argc, char **argv)
 		{
 			if (y == 0)
 				putss("\n");
+			free(lin);
+			free_l(&list);
 			return (0);
 		}
-		space = hand_space(lin, argv[0], &list);
-		if (space == -1)
+		space = hand_space(lin, argv[0], &list, er);
+		if (space)
 		{
-			le = lenght(lin);
-			li = malloc(sizeof(char) * le);
-			li = ifnotexcv(lin);
-			_printf("ccdccc", argv[0], ": ", er, ": ", li, ": not found\n");
-			free(lin);
-			free(li);
-			er++;
+			if (space != -1)
+			{
+				er = space;
+			}
+			else
+			{
+				le = lenght(lin);
+				li = malloc(sizeof(char) * le);
+				li = ifnotexcv(lin);
+				_printf("ccdccc", argv[0], ": ", er, ": ",
+						li, ": not found\n");
+				free(lin);
+				free(li);
+				er++;
+			}
 		}
 	}
 	free(lin);
+	free_l(&list);
 	return (0);
 }
