@@ -69,11 +69,7 @@ int countTokens(char *str, char *delim)
 		c++;
 		t = mystrtok(NULL, delim);
 	}
-	if (s)
-	{
 		free(s);
-	}
-	s = NULL;
 	return (c);
 }
 
@@ -94,22 +90,29 @@ int atty(void)
 /**
  * ifnotexcv - function
  * @st: string to check
+ * @argv: arg
+ * @er: num
+ * @status: s
  * Return: always
  */
 
-char *ifnotexcv(char *st)
+char *ifnotexcv(char *st, char *argv, int er, int *status)
 {
 	char *new[2];
 
 	if (new == NULL)
 	{
-		return (NULL);
+		return (-1);
 	}
 	new[0] = mystrtok(st, " ");
 	new[1] = mystrtok(new[0], "\n");
 
 	st = new[1];
-	return (st);
+	_printf("ccdccc", argv, ": ", er, ": ", st, ": not found\n");
+	er++;
+	*status = 127;
+	free(st);
+	return (er);
 }
 
 /**

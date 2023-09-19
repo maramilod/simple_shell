@@ -51,7 +51,7 @@ int lenght(char *k);
 int same(char *w, char *m);
 int hand_space(char *k, char *argv, env_l **env, int er, int *status);
 int excv(char *str, char **argv, env_l **env, int *status);
-char *ifnotexcv(char *st);
+int ifnotexcv(char *st, char *argv, int er, int *status);
 int our(char *lin, char **argv, env_l **env);
 int atty(void);
 char *pathy(char *arg, env_l **env);

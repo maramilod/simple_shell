@@ -1,6 +1,40 @@
 #include "main.h"
 
 /**
+ * cd_h - f
+ * @i: i
+ * @env: e
+ * @j: j
+ * @cat: c
+ */
+void cd_h(int i, env_l **env, int j, char *cat)
+{
+	char *pwd = NULL;
+
+	if (j != 3)
+	{
+		pwd = get_l(*env, i);
+		chdir(pwd);
+		if (j == 2)
+			puts(pwd);
+		cat = malloc(lenght(pwd) + 5);
+		_strcopy(cat, "PWD=");
+		_strcat(cat, pwd);
+		i = find(*env, "PWD");
+	}
+	if (i != -1)
+	{
+		delete_l(env, i);
+		edit_l(env, cat, i);
+	}
+	else
+		add_l(env, cat);
+	free(cat);
+	if (j == 3)
+		return;
+	free(pwd);
+}
+/**
  * _getline - function
  * @lin: the line well read
  * @l: the memory
@@ -12,7 +46,7 @@ ssize_t _getline(char **lin, size_t l, int fn)
 {
 	ssize_t br, tr = 0;
 
-	if (lin == NULL || l == 0 || fn <0)
+	if (lin == NULL || l == 0 || fn < 0)
 	{
 		return (-1);
 	}
@@ -22,7 +56,7 @@ ssize_t _getline(char **lin, size_t l, int fn)
 		return (-1);
 	}
 
-	while((br == read(fn, *lin + tr, 1)) > 0)
+	while ((br == read(fn, *lin + tr, 1)) > 0)
 	{
 		tr += br;
 		if (tr >= (ssize_t)l || (*lin)[tr - 1] == '\n')
@@ -87,7 +121,7 @@ void excute(char *file, char **argv, env_l *list)
 	int sta = 0;
 
 	fd = open(file, O_RDONLY);
-	if(fd == -1)
+	if (fd == -1)
 	{
 		perror(file);
 		return;
@@ -101,7 +135,7 @@ void excute(char *file, char **argv, env_l *list)
 			le = lenght(lin);
 			li = malloc(sizeof(char) * le);
 			li = ifnotexcv(lin);
-			_printf("ccdccc", argv[0], ": ", er, ": ",li, ": not found\n");
+			_printf("ccdccc", argv[0], ": ", er, ": ", li, ": not found\n");
 			free(li);
 			er++;
 		}

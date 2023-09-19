@@ -20,16 +20,11 @@ int main(int argc, char **argv)
 	(void)argc;
 	signal(SIGINT, sign);
 	list = set_list();
-	if (argc == 2)
-	{
-		excute(argv[1], argv, list);
-		return (0);
-	}
 	while (1)
 	{
 		if (y == 0)
 			putss("<3 ");
-		r = getline(&lin, &l, stdin);/* STDIN_FILENO);*/
+		r = getline(&lin, &l, stdin);
 		if (r == EOF)
 		{
 			if (y == 0)
@@ -46,16 +41,10 @@ int main(int argc, char **argv)
 				er = space;
 			else
 			{
-				li = ifnotexcv(lin);
-				_printf("ccdccc", argv[0], ": ", er, ": ",
-						li, ": not found\n");
-				er++;
-				status = 127;
-				free(lin);
+				er = ifnotexcv(lin, argv[0], er, &status);
+				lin = NULL;
 			}
 		}
 	}
-	free(lin);
-	free_l(list);
 	return (0);
 }

@@ -99,15 +99,9 @@ char *pathy(char *arg, env_l **env)
 	{
 		or = _strdup(bigpath);
 		free(bigpath);
-		if (bigpath)
-		{
-			free(bigpath);
-			bigpath = NULL;
-		}
 		if (or == NULL)
 		{
 			free(buff);
-			buff = NULL;
 			return (NULL);
 		}
 		path = mystrtok(or, ":");

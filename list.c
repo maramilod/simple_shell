@@ -30,12 +30,13 @@ env_l *add_l(env_l **list, char *enron)
 	if (temp == NULL || list == NULL)
 		return (NULL);
 	temp->next = NULL;
-	if (enron)
+	if (enron && temp && list)
 	{
 		temp->env = _strdup(enron);
 		if (!temp->env)
 		{
-			free(temp);
+			free_l(h);
+			free_l(temp);
 			return (NULL);
 		}
 	}
@@ -94,35 +95,18 @@ int print_l(char **arg, env_l **list)
 }
 /**
  * free_l - function
- * @h: list
- * Return: i
+ * @list: l
  */
-size_t free_l(env_l *h)
+void free_l(env_l *list)
 {
-	size_t i = 0;
-	int j;
-	env_l *t;
+	env_l *cuurent = list;
+	env_l *next;
 
-	if (!h || !(*h))
-		return (0);
-	while (*h)
+	while (current)
 	{
-		j = *h - (*h)->next;
-		if (j > 1 || j == 1)
-		{
-			t = (*h)->next;
-			free(*h);
-			*h = t;
-			i++;
-		}
-		if (j <= 0)
-		{
-			free(*h);
-			*h = NULL;
-			++i;
-			return (i);
-		}
+		next = current->next;
+		free(current->env);
+		free(current);
+		current = next;
 	}
-	*h = NULL;
-	return (i);
 }
