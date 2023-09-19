@@ -3,41 +3,78 @@
 /**
  * hand_space - function to call
  * @k: the line i well check
+ * @argv: second
+ * @env: env
+ * @er: errors
+ * @status: exit with
  * Return: always 0 or 1
  */
 
-int hand_space(char *k, char *argv, env_l **env, int er)
+int hand_space(char *k, char *argv, env_l **env, int er, int *status)
 {
-	int o, u = 0, i = 0, x;
-	char **new;
+	int o, u = 0, i = 0, x, numtoken;
+	char **new = NULL;
+	char *neww = NULL;
 
-	new = malloc(sizeof(char *) * 1024);
+	numtoken = countTokens(k, " \n");
+	new = malloc(sizeof(char *) * (numtoken + 1));
 
 	if (!new)
 		return (-1);
-	new[i] = mystrtok(k, " \"\n");
-
+	new[i] = mystrtok(k, " \n");
 	while (new[i])
 	{
+		if (new[i][0] == '#')
+		{
+			break;
+		}
 		i++;
 		new[i] = mystrtok(NULL, " \n");
 	}
+
 	new[i] = NULL;
-	o = excv(new[0], new, env);
-	u = our(new[0], new, env);
+
 	if (same(new[0], "exit") == 0)
 	{
-		x = _exxit(new, argv, er);
-		free(new);
+		x = _exxit(new, argv, er, env, status);
 		return (x);
 	}
-	else if (o == -1 && u == -1)
+	neww = _strdup(new[0]);
+	o = excv(neww, new, env, status);
+	u = our(neww, new, env);
+	if (o == -1 && u == -1)
 	{
 		free(new);
 		return (-1);
 	}
-	free(new);
+	free(neww);
 	return (0);
+}
+/**
+ * countTokens - function to coubt
+ * @str: first
+ * @delim: second
+ * Return: count
+ */
+
+int countTokens(char *str, char *delim)
+{
+	int c = 0;
+	char *s, *t;
+
+	s = _strdup(str);
+	t = mystrtok(s, delim);
+	while (t)
+	{
+		c++;
+		t = mystrtok(NULL, delim);
+	}
+	if (s)
+	{
+		free(s);
+	}
+	s = NULL;
+	return (c);
 }
 
 /**
@@ -62,20 +99,17 @@ int atty(void)
 
 char *ifnotexcv(char *st)
 {
-	char *new;
-	int ln;
+	char *new[2];
 
-	ln = lenght(st);
-	new = malloc((sizeof(char *) * ln) + 1);
 	if (new == NULL)
 	{
 		return (NULL);
 	}
-	_strcopy(new, st);
-	new = strtok(new, " ");
-	new = strtok(new, "\n");
+	new[0] = mystrtok(st, " ");
+	new[1] = mystrtok(new[0], "\n");
 
-	return (new);
+	st = new[1];
+	return (st);
 }
 
 /**

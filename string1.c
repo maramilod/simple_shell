@@ -26,47 +26,6 @@ int _strncm(char *s1, char *s2, int t)
 }
 
 /**
- * same - function say if equals
- * @w: first
- * @m: second
- * Return: 1| 0
- */
-
-int samey(const char *w, char *m)
-{
-	size_t  a = 0, b = 0, i = 0;
-
-	if (w == NULL || m == NULL)
-	{
-		return (-1);
-	}
-	while (w[a] != '\n' && w[a])
-	{
-		a++;
-	}
-	while (m[b])
-	{
-		b++;
-	}
-	if (a == b)
-	{
-		while (w[i] == m[i] && w[i] != '\0' && m[i] != '\0')
-		{
-			i++;
-		}
-	}
-	else
-	{
-		return (-1);
-	}
-	if (i == a && i == b)
-	{
-		return (0);
-	}
-	return (-1);
-}
-
-/**
  * lenght - strlen function
  * @k: the string
  * Return: int
@@ -81,7 +40,7 @@ int lenght(char *k)
 		return (0);
 	}
 
-	while (k[i] != '\0')
+	while (*k++)
 	{
 		i++;
 	}
@@ -122,12 +81,16 @@ char *_strcopy(char *buffer, char *newcopy)
 {
 	int i = 0;
 
-	while (newcopy[i] && newcopy[i] != '\n')
+	while (buffer == newcopy || newcopy == 0)
+	{
+		return (buffer);
+	}
+	while (newcopy[i])
 	{
 		buffer[i] = newcopy[i];
 		i++;
 	}
-	newcopy[i] = '\0';
-	return (newcopy);
+	buffer[i] = 0;
+	return (buffer);
 }
 
