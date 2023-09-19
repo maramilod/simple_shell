@@ -42,6 +42,8 @@ int main(int argc, char **argv)
 			else
 			{
 				er = ifnotexcv(lin, argv[0], er, &status);
+				if (lin)
+					free(lin);
 				lin = NULL;
 			}
 		}

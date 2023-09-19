@@ -111,7 +111,6 @@ int ifnotexcv(char *st, char *argv, int er, int *status)
 	_printf("ccdccc", argv, ": ", er, ": ", st, ": not found\n");
 	er++;
 	*status = 127;
-	free(st);
 	return (er);
 }
 
