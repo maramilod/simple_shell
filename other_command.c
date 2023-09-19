@@ -5,13 +5,14 @@
  * @str: value we well check
  * @argv: arg
  * @env: environ -_-
+ * @er: r
  * @status: s
  * Return: -1 if false
  */
 
 int _exxit(char **str, char *argv, int er, env_l **env, int *status)
 {
-	int i = 0, j = 0, mul = 1, u = 0, f = 0;
+	int j = 0, mul = 1, u = 0, f = 0;
 
 	if (str[1] == NULL)
 	{

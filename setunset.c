@@ -30,6 +30,7 @@ int delete_l(env_l **head, int index)
 {
 	int i;
 	env_l *a, *b;
+
 	if (!head || !*head)
 		return (-1);
 	if (index == 0)
@@ -48,6 +49,7 @@ int delete_l(env_l **head, int index)
 	if (i == index)
 	{
 		b->next = a->next;
+		free(a->env);
 		free(a);
 		return (1);
 	}
@@ -61,12 +63,21 @@ int delete_l(env_l **head, int index)
  */
 int unset(char **arg, env_l **list)
 {
-	int i;
+	int i, j;
 
-	(void)**arg;
-	i = find(*list, arg[1]);
-	if (i != -1)
-		delete_l(list, i);
+	j = 1;
+	if (arg[1] == NULL)
+	{
+		write(STDERR_FILENO, "Too few argu -_-\n", 17);
+		return (0);
+	}
+	while (arg[j] != NULL)
+	{
+		i = find(*list, arg[1]);
+		if (i != -1)
+			delete_l(list, i);
+		j++;
+	}
 	return (0);
 }
 /**
@@ -118,19 +129,19 @@ env_l *edit_l(env_l **list, char *buffer, int idx)
  */
 int _setenv(char **arg, env_l **list)
 {
-	int i = 0;
+	int i = 0, j = 0;
 	char *buf = NULL;
 
-	if (!arg[1] || !arg[2])
+	while (arg[j])
+		j++;
+	if (j != 3)
+	{
+		write(STDERR_FILENO, "Incorrect num of argu\n", 22);
 		return (0);
+	}
 	buf = malloc(lenght(arg[1]) + lenght(arg[2]) + 2);
 	if (!buf)
 		return (0);
-	while (buf[i])
-	{
-		buf[i] = '\0';
-		i++;
-	}
 	_strcopy(buf, arg[1]);
 	_strcat(buf, "=");
 	_strcat(buf, arg[2]);

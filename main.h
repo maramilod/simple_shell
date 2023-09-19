@@ -22,25 +22,27 @@ typedef struct ourcommand
 	char *com;
 	int (*fn)();
 } ourc;
-
-typedef struct env_list {
+/**
+ * struct env_list - fun
+ * @env:e
+ * @next: point to next node
+ */
+typedef struct env_list
+{
 	char *env;
 	struct env_list *next;
 } env_l;
 
-/**
- * linked list
- */
 int samenv(char *en, char *arg);
 int print_l(char **arg, env_l **list);
-env_l *add_l(env_l **list,char *enron);
+env_l *add_l(env_l **list, char *enron);
 env_l *set_list();
 int find(env_l *head, char *word);
 int delete_l(env_l **head, int index);
 int unset(char **arg, env_l **list);
 env_l *edit_l(env_l **list, char *buffer, int idx);
 int _setenv(char **arg, env_l **list);
-size_t free_l(env_l *h);
+void free_l(env_l *h);
 
 unsigned int is_d(char s, char *d);
 char *mystrtok(char *str, char *d);
@@ -63,9 +65,9 @@ int _exxit(char **str, char *argv, int er, env_l **env, int *status);
 char *_strcopy(char *buffer, char *newcopy);
 char *_strncpy(char *str2, char *str, int n);
 char *_strdup(char *str);
-ssize_t _getline(char **lin, size_t l, int fn);
-void freest(char **st);
+
 char *get_l(env_l *head, int index);
+void cd_h(int i, env_l **env, int j, char *cat);
 int cd(char **argv, env_l **env);
 void excute(char *file, char **argv, env_l *list);
 int countTokens(char *str, char *delim);

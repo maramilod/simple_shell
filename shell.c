@@ -11,7 +11,7 @@
 int main(int argc, char **argv)
 {
 	env_l *list;
-	char *lin = NULL, *li = NULL;
+	char *lin = NULL;
 	size_t l = 0;
 	ssize_t r;
 	int space = 0, er = 1, y, status = 0;

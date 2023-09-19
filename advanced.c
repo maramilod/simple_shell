@@ -115,13 +115,13 @@ int cd(char **argv, env_l **env)
 	{
 		i = find(*env, "HOME");
 		if (i != -1)
-			cd_l(i, env, 1, NULL);
+			cd_h(i, env, 1, NULL);
 	}
 	else if (same(argv[1], "-") == 0)
 	{
 		i = find(*env, "OLDPWD");
 		if (i != -1)
-			cd_h(i, env, 1, NULL)
+			cd_h(i, env, 1, NULL);
 	}
 	else
 	{

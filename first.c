@@ -96,7 +96,7 @@ int atty(void)
  * Return: always
  */
 
-char *ifnotexcv(char *st, char *argv, int er, int *status)
+int ifnotexcv(char *st, char *argv, int er, int *status)
 {
 	char *new[2];
 

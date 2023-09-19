@@ -99,7 +99,7 @@ int print_l(char **arg, env_l **list)
  */
 void free_l(env_l *list)
 {
-	env_l *cuurent = list;
+	env_l *current = list;
 	env_l *next;
 
 	while (current)
