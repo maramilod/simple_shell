@@ -27,7 +27,7 @@ env_l *add_l(env_l **list, char *enron)
 		return (NULL);
 	h = *list;
 	temp = malloc(sizeof(env_l));
-	if (temp == NULL || list == NULL)
+	if (temp == NULL)
 		return (NULL);
 	temp->next = NULL;
 	if (enron && temp && list)
@@ -86,9 +86,9 @@ int print_l(char **arg, env_l **list)
 	while (plist != NULL)
 	{
 		if (plist->env == NULL)
-			puts("(nil)");
+			putss("(nil)");
 		else
-			puts(plist->env);
+			putss(plist->env);
 		plist = plist->next;
 	}
 	return (0);

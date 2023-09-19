@@ -108,7 +108,7 @@ int cd(char **argv, env_l **env)
 	{
 		getcwd(opwd, 1024);
 		ocat = malloc(lenght(opwd) + 8);
-		ocat = _strdup("OLDPWD=");
+		_strcopy(ocat, "OLDPWD=");
 		_strcat(ocat, opwd);
 	}
 	if (!argv[1] || same(argv[1], "$HOME") == 0)
@@ -121,7 +121,7 @@ int cd(char **argv, env_l **env)
 	{
 		i = find(*env, "OLDPWD");
 		if (i != -1)
-			cd_h(i, env, 1, NULL);
+			cd_h(i, env, 2, NULL);
 	}
 	else
 	{

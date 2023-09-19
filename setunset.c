@@ -73,7 +73,7 @@ int unset(char **arg, env_l **list)
 	}
 	while (arg[j] != NULL)
 	{
-		i = find(*list, arg[1]);
+		i = find(*list, arg[j]);
 		if (i != -1)
 			delete_l(list, i);
 		j++;

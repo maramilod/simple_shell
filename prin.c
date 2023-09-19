@@ -21,7 +21,21 @@ void puti(int num)
 		number[j] = number[i - j - 1];
 		number[i - j - 1] = temp;
 	}
-	write(STDOUT_FILENO, number, i);
+	write(STDERR_FILENO, number, i);
+}
+/**
+ * putsss - function
+ * @string: s
+ */
+void putsss(char *string)
+{
+	int i = 0;
+
+	while (string[i])
+	{
+		write(STDERR_FILENO, &string[i], 1);
+		i++;
+	}
 }
 /**
  * putss - function
@@ -35,7 +49,7 @@ void putss(char *string)
 
 	while (string[i])
 	{
-		write(1, &string[i], 1);
+		write(STDOUT_FILENO, &string[i], 1);
 		i++;
 	}
 }
@@ -64,7 +78,7 @@ int _printf(char *arg, ...)
 		else
 		{
 			x = va_arg(args, char *);
-			putss(x);
+			putsss(x);
 		}
 	}
 	va_end(args);

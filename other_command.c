@@ -69,6 +69,7 @@ int our(char *lin, char **argv, env_l **env)
 		if (same(lin, array[i].com) == 0)
 		{
 			array[i].fn(argv, env);
+			free(argv);
 			return (0);
 		}
 	}

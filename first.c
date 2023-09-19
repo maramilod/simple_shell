@@ -44,7 +44,7 @@ int hand_space(char *k, char *argv, env_l **env, int er, int *status)
 	u = our(neww, new, env);
 	if (o == -1 && u == -1)
 	{
-		free(new);
+		free(neww);
 		return (-1);
 	}
 	free(neww);
@@ -69,7 +69,7 @@ int countTokens(char *str, char *delim)
 		c++;
 		t = mystrtok(NULL, delim);
 	}
-		free(s);
+	free(s);
 	return (c);
 }
 

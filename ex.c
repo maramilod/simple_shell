@@ -24,7 +24,7 @@ int excv(char *str, char **argv, env_l **env, int *status)
 		pid = fork();
 		if (pid == 0)
 		{
-			if (execve(str, argv, NULL) == -1)
+			if (execve(s, argv, NULL) == -1)
 			{
 				perror("Error excuting command");
 				exit(EXIT_FAILURE);
