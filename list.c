@@ -88,7 +88,10 @@ int print_l(char **arg, env_l **list)
 		if (plist->env == NULL)
 			putss("(nil)");
 		else
+		{
 			putss(plist->env);
+			putss("\n");
+		}
 		plist = plist->next;
 	}
 	return (0);
