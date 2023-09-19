@@ -23,20 +23,17 @@ typedef struct ourcommand
 	int (*fn)();
 } ourc;
 
-/**
- * struct env_list - struct
- * @env: environ
- * @next: next node
- */
-typedef struct env_list
-{
+typedef struct env_list {
 	char *env;
 	struct env_list *next;
 } env_l;
 
+/**
+ * linked list
+ */
 int samenv(char *en, char *arg);
 int print_l(char **arg, env_l **list);
-env_l *add_l(env_l **list, char *enron);
+env_l *add_l(env_l **list,char *enron);
 env_l *set_list();
 int find(env_l *head, char *word);
 int delete_l(env_l **head, int index);
