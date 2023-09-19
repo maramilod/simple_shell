@@ -4,38 +4,50 @@
  * excv - function to excute
  * @str: value
  * @argv: string
+ * @env: value
+ * @status: exit with
  * Return: always 0 | -1
  */
 
-int excv(char *str, char **argv, env_l **env)
+int excv(char *str, char **argv, env_l **env, int *status)
 {
 	pid_t pid;
+	char *s;
 
 	if (!str)
 	{
 		return (0);
 	}
-	str = pathy(str, env);
-	if (str)
+	s = pathy(str, env);
+	if (s)
 	{
 		pid = fork();
 		if (pid == 0)
 		{
-			execve(str, argv, NULL);
+			if (execve(str, argv, NULL) == -1)
+			{
+				perror("Error excuting command");
+				exit(EXIT_FAILURE);
+			}
 		}
 		else if (pid > 0)
 		{
-			wait(NULL);
+			waitpid(pid, status, 0);
+			if (same(str, s) != 0)
+			{
+				free(s);
+			}
 			return (0);
 		}
 	}
-	free(str);
+	free(s);
 	return (-1);
 }
 
 /**
  * moge - my own get env function
  * @path: PATH
+ * @env: env
  * Return: the path
  */
 
@@ -66,56 +78,50 @@ char *moge(char *path, env_l **env)
 /**
  * pathy - function handle the path
  * @arg: string say if it's a ath or not
+ * @env: env
  * Return: importnt
  */
 
 char *pathy(char *arg, env_l **env)
 {
 	char *bigpath = NULL, *or = NULL;
-	char *path = NULL, *buff = NULL;
-	char *res = NULL;
+	char *path = NULL, *buff = NULL, *res = NULL;
 
 	if (!arg)
-	{
 		return (NULL);
-	}
-	if (arg[0] == '/')
 	if (access(arg, F_OK) != -1)
-	{
 		return (arg);
-	}
 	buff = malloc(sizeof(char) * 1024);
 	if (buff == NULL)
-	{
 		return (NULL);
-	}
-	bigpath = malloc(sizeof(char) * 1024);
 	bigpath = moge("PATH", env);
-
 	if (bigpath != NULL)
 	{
-		or = malloc(sizeof(char) * 1024);
 		or = _strdup(bigpath);
 		free(bigpath);
+		if (bigpath)
+		{
+			free(bigpath);
+			bigpath = NULL;
+		}
 		if (or == NULL)
 		{
 			free(buff);
+			buff = NULL;
 			return (NULL);
 		}
-		path = strtok(or, ":");
+		path = mystrtok(or, ":");
 		while (path)
 		{
 			_strncpy(buff, path, 1024);
 			_strcat(buff, "/");
 			_strcat(buff, arg);
-
 			if (access(buff, F_OK) != -1)
 			{
-				res = malloc(sizeof(char) * lenght(buff));
 				res = _strdup(buff);
 				break;
 			}
-			path = strtok(NULL, ":");
+			path = mystrtok(NULL, ":");
 		}
 	}
 	free(or);

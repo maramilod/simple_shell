@@ -97,7 +97,7 @@ int print_l(char **arg, env_l **list)
  * @h: list
  * Return: i
  */
-size_t free_l(env_l **h)
+size_t free_l(env_l *h)
 {
 	size_t i = 0;
 	int j;
