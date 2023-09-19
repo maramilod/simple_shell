@@ -37,9 +37,7 @@ int main(int argc, char **argv)
 		if (space)
 		{
 			if (space != -1)
-			{
 				er = space;
-			}
 			else
 			{
 				le = lenght(lin);
